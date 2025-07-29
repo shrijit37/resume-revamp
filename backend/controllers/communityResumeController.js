@@ -34,6 +34,18 @@ const contributeResume = asyncHandler(async (req, res) => {
     
 });
 
+const getAllCommunityResume = asyncHandler(async(req, res) => {
+    try{
+        const resumes = await resumeTempleteModel.find({}, 'uuid');
+        const resume_uuid = resumes.map((ele) => ele.uuid);
+        console.log(resume_uuid);
+        // console.log(resumes)
+        res.status(200).json(resume_uuid);
+    } catch(e) {
+        res.status(400).json({message: e.message})
+    }
+    
+})
 
 
-export { contributeResume };
+export { contributeResume, getAllCommunityResume };
