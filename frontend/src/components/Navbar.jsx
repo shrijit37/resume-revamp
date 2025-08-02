@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import coffeeButton from "../assets/coffee.png";
 import { useNavigate } from 'react-router';
-
 const navLinks = [
   { name: 'Home', href: '/' },
   { name: 'Resume Analysis', href: '/analyse' },
@@ -11,6 +10,7 @@ const navLinks = [
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [signIn, setSignIn] = useState(true);
 
   return (
     <div className='flex flex-row justify-between w-full'>
@@ -49,12 +49,24 @@ const Navbar = () => {
         <a href="#">
           <img src={coffeeButton} alt="coffee" className='w-20 h-8 mr-2' />
         </a>
-        <button className='btn btn-info mr-2' onClick={() => navigate('/signin')}>
-          Sign-in
-        </button>
-        <button className='btn btn-primary' onClick={() => navigate('/signup')}>
-          Sign-up
-        </button>
+
+        {
+          signIn ? (
+            <button className="btn btn-info mr-2" onClick={() => navigate("/dashboard")}>
+              dashboard
+            </button>
+          ) : (
+            <>  
+            <button className='btn btn-info mr-2' onClick={() => navigate('/signin')}>
+                Sign-in
+              </button>
+              <button className='btn btn-primary' onClick={() => navigate('/signup')}>
+                Sign-up
+              </button>
+            </>
+          )
+        }
+
       </div>
     </div>
   );

@@ -4,12 +4,20 @@ import test from "./routes/test.js";
 import resumeRoute from "./routes/resumeRoute.js"
 import connectDb from "./db/config.js";
 import optimizeResume from "./utils/optimizeResume.js";
-
+import cors from "cors";
 
 dotenv.config();
 const app = Express();
 app.use(Express.json()); 
 app.use(Express.urlencoded({ extended: true }));
+
+app.use(
+  cors({
+    origin: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  })
+);
 
 connectDb();
 
