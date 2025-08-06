@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
+import { CoffeeIcon } from 'lucide-react';
 interface NavLink {
   name: string;
   href: string;
@@ -21,11 +22,9 @@ const navLinks: NavLink[] = [
   { name: 'Resume Optimization', href: '/resumeoptimize' },
 ];
 
-const coffeeButton: string = "https://resumerevamp.s3.ap-south-1.amazonaws.com/coffee.png";
 
 const Navbar: React.FC = () => {
   const router = useRouter();
-  const [signIn, setSignIn] = useState<boolean>(true);
 
   const navigate = (href: string): void => {
     router.push(href);
@@ -53,17 +52,7 @@ const Navbar: React.FC = () => {
       </div>
 
       <div className='m-5 flex items-center space-x-6'>
-        <a href="#" aria-label="Buy me a coffee">
-          <img
-            src={coffeeButton}
-            alt="coffee"
-            className='w-20 h-8 mr-2'
-          />
-        </a>
-          
-        
-
-
+       
         <SignedIn>
           <UserButton
             appearance={{
@@ -84,6 +73,12 @@ const Navbar: React.FC = () => {
             </button>
           </SignInButton>
         </SignedOut>
+         <a href="#" aria-label="Buy me a coffee">
+          <Button variant="outline" className="w-32 h-12">
+          <CoffeeIcon className='cursor-alias w-12 h-12 text-yellow-500 hover:text-yellow-600 transition-colors duration-300' />
+          <span className="ml-2 text-[0.7rem] font-semibold">Buy me a coffee</span>
+          </Button>
+        </a>
       </div>
     </div>
   );

@@ -2,7 +2,8 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import AnimatedContent from './AnimatedContent'
-import hero_resume from '../../../public/resume_hero.svg' 
+import Image from 'next/image'
+
 const Header = () => {
   return (
     <div>
@@ -36,7 +37,7 @@ const Header = () => {
                     threshold={0.2}
                     delay={0}
                 >
-                    <img src="/resume_hero.svg" alt="sdfas" />
+                    <Image src="/resume_hero.svg" alt="sdfas" width={480} height={120}/>
                     {/* <div className="text-3xl">sdfsa</div> */}
                 </AnimatedContent>
             </div>

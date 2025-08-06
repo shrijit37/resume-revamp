@@ -1,5 +1,4 @@
-import HowItWorksImage from "../assets/Howitworks.svg"
-
+import Image from "next/image";
 
 type HowItWorksData = {
   step: string;
@@ -59,10 +58,12 @@ const HowItWorks : React.FC= () => {
         </div>
         
         <div className="flex-shrink-0">
-          <img 
+          <Image 
             src='/Howitworks.svg' 
             alt="How it works illustration" 
-            className='h-80 w-80 lg:h-96 lg:w-96 drop-shadow-lg hover:scale-105 transition-transform duration-300' 
+            width={400}
+            height={400}
+            className=' drop-shadow-lg hover:scale-105 transition-transform duration-300' 
           />
         </div>
       </div>

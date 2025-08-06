@@ -523,7 +523,7 @@ export default function ResumeBuilder() {
   React.useEffect(() => {
     const timeout = setTimeout(() => {
       if (iframeRef.current) {
-        iframeRef.current.srcdoc = getResumeTemplate(resumeData);
+       (iframeRef.current as HTMLIFrameElement).srcdoc = getResumeTemplate(resumeData);
       }
     }, 300);
 
