@@ -22,3 +22,5 @@ const createUser = async (userData: {
     throw new Error("Failed to create user");
   }
 };
+
+export default createUser;

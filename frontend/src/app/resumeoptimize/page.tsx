@@ -9,10 +9,69 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Plus, Trash2, Download, Eye, X } from 'lucide-react';
 
+
+//types
+
+
+type UserResumeData = {
+  personalInfo: {
+    name: string;
+    phone: string;
+    email: string;
+    github?: string;
+    linkedin?: string;
+    leetcode?: string;
+    website?: string;
+    location?: string;
+  };
+  summary: string;
+  education: Array<{
+    degree: string;
+    institution: string;
+    field: string;
+    gpa?: string;
+    startDate?: string;
+    endDate?: string;
+  }>;
+  skills: {
+    Frontend: string;
+    Backend: string;
+    Tools: string;
+    Databases: string;
+    Languages: string;
+    Other: string;
+  };
+  experience: Array<{
+    title: string;
+    company: string;
+    startDate?: string;
+    endDate?: string;
+    current: boolean;
+
+    description: string;
+    achievements: string[];
+  }>;
+  projects: Array<{
+    name: string;
+    liveUrl?: string;
+    codeUrl?: string;
+    description: string[];
+  }>;
+  certifications: string[];
+  languages: string[];
+  awards: string[];
+};
+
+
+type UserResumeDataArrayKeys = {
+  [K in keyof UserResumeData]: UserResumeData[K] extends any[] ? K : never
+}[keyof UserResumeData];
+
+///-------------------
 export default function ResumeBuilder() {
   const iframeRef = useRef(null);
   
-  const [resumeData, setResumeData] = useState({
+  const [resumeData, setResumeData] = useState<UserResumeData>({
     personalInfo: {
       name: '',
       phone: '',
@@ -61,7 +120,8 @@ export default function ResumeBuilder() {
   });
 
   // Standardized Resume Template
-  const getResumeTemplate = (data) => {
+  const getResumeTemplate = (data : UserResumeData) => {
+    
     return `
 <!DOCTYPE html>
 <html lang="en">
@@ -270,7 +330,7 @@ export default function ResumeBuilder() {
     `;
   };
 
-  const updatePersonalInfo = (field, value) => {
+  const updatePersonalInfo = (field: any, value: any) => {
     setResumeData(prev => ({
       ...prev,
       personalInfo: { ...prev.personalInfo, [field]: value }
@@ -284,14 +344,14 @@ export default function ResumeBuilder() {
     }));
   };
 
-  const removeEducation = (index) => {
+  const removeEducation = (index: number) => {
     setResumeData(prev => ({
       ...prev,
       education: prev.education.filter((_, i) => i !== index)
     }));
   };
 
-  const updateEducation = (index, field, value) => {
+  const updateEducation = (index: number, field: any, value: any) => {
     setResumeData(prev => ({
       ...prev,
       education: prev.education.map((edu, i) => 
@@ -300,7 +360,7 @@ export default function ResumeBuilder() {
     }));
   };
 
-  const updateSkills = (category, value) => {
+  const updateSkills = (category: any, value: any) => {
     setResumeData(prev => ({
       ...prev,
       skills: { ...prev.skills, [category]: value }
@@ -314,14 +374,14 @@ export default function ResumeBuilder() {
     }));
   };
 
-  const removeExperience = (index) => {
+  const removeExperience = (index:any) => {
     setResumeData(prev => ({
       ...prev,
       experience: prev.experience.filter((_, i) => i !== index)
     }));
   };
 
-  const updateExperience = (index, field, value) => {
+  const updateExperience = (index:any, field:any, value:any) => {
     setResumeData(prev => ({
       ...prev,
       experience: prev.experience.map((exp, i) => 
@@ -330,7 +390,7 @@ export default function ResumeBuilder() {
     }));
   };
 
-  const addAchievement = (expIndex) => {
+  const addAchievement = (expIndex:any) => {
     setResumeData(prev => ({
       ...prev,
       experience: prev.experience.map((exp, i) => 
@@ -339,7 +399,7 @@ export default function ResumeBuilder() {
     }));
   };
 
-  const removeAchievement = (expIndex, achIndex) => {
+  const removeAchievement = (expIndex:any, achIndex:any) => {
     setResumeData(prev => ({
       ...prev,
       experience: prev.experience.map((exp, i) => 
@@ -348,7 +408,7 @@ export default function ResumeBuilder() {
     }));
   };
 
-  const updateAchievement = (expIndex, achIndex, value) => {
+  const updateAchievement = (expIndex:any, achIndex:any, value:any) => {
     setResumeData(prev => ({
       ...prev,
       experience: prev.experience.map((exp, i) => 
@@ -367,14 +427,14 @@ export default function ResumeBuilder() {
     }));
   };
 
-  const removeProject = (index) => {
+  const removeProject = (index:any) => {
     setResumeData(prev => ({
       ...prev,
       projects: prev.projects.filter((_, i) => i !== index)
     }));
   };
 
-  const updateProject = (index, field, value) => {
+  const updateProject = (index:any, field:any, value:any) => {
     setResumeData(prev => ({
       ...prev,
       projects: prev.projects.map((proj, i) => 
@@ -383,7 +443,7 @@ export default function ResumeBuilder() {
     }));
   };
 
-  const addProjectDescription = (projIndex) => {
+  const addProjectDescription = (projIndex:any) => {
     setResumeData(prev => ({
       ...prev,
       projects: prev.projects.map((proj, i) => 
@@ -392,7 +452,7 @@ export default function ResumeBuilder() {
     }));
   };
 
-  const removeProjectDescription = (projIndex, descIndex) => {
+  const removeProjectDescription = (projIndex:any, descIndex:any) => {
     setResumeData(prev => ({
       ...prev,
       projects: prev.projects.map((proj, i) => 
@@ -401,7 +461,7 @@ export default function ResumeBuilder() {
     }));
   };
 
-  const updateProjectDescription = (projIndex, descIndex, value) => {
+  const updateProjectDescription = (projIndex:any, descIndex:any, value:any) => {
     setResumeData(prev => ({
       ...prev,
       projects: prev.projects.map((proj, i) => 
@@ -413,21 +473,21 @@ export default function ResumeBuilder() {
     }));
   };
 
-  const addArrayItem = (section) => {
+  const addArrayItem = (section:UserResumeDataArrayKeys) => {
     setResumeData(prev => ({
       ...prev,
       [section]: [...prev[section], '']
     }));
   };
 
-  const removeArrayItem = (section, index) => {
+  const removeArrayItem = (section:UserResumeDataArrayKeys, index:any) => {
     setResumeData(prev => ({
       ...prev,
       [section]: prev[section].filter((_, i) => i !== index)
     }));
   };
 
-  const updateArrayItem = (section, index, value) => {
+  const updateArrayItem = (section:UserResumeDataArrayKeys, index:any, value:any) => {
     setResumeData(prev => ({
       ...prev,
       [section]: prev[section].map((item, i) => i === index ? value : item)
@@ -439,10 +499,10 @@ export default function ResumeBuilder() {
     
     if (iframe) {
       try {
-        if (iframe.contentWindow) {
-          iframe.contentWindow.focus();
-          iframe.contentWindow.print();
-        }
+        // if (iframe.contentWindow) {
+        //   iframe.contentWindow.focus();
+        //   iframe.contentWindow.print();
+        // }
       } catch (error) {
         const printWindow = window.open('', '_blank');
         if (printWindow) {

@@ -1,7 +1,14 @@
 import HowItWorksImage from "../assets/Howitworks.svg"
 
-const HowItWorks = () => {
-  const data = [
+
+type HowItWorksData = {
+  step: string;
+  title: string;
+  description: string;
+};
+
+const HowItWorks : React.FC= () => {
+  const data: HowItWorksData[] = [
     {
       step: "1",
       title: "Upload Your Resume & JD",
@@ -26,7 +33,7 @@ const HowItWorks = () => {
 
   return (
     <div className='py-16 px-6 max-w-7xl mx-auto'>
-      <div className="text-5xl text-center text-yellow-600 text-accent mb-16 font-bold">
+      <div className="text-5xl text-center text-yellow-600 mb-16 font-bold">
         How it works
       </div>
       
