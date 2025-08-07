@@ -40,6 +40,7 @@ type UserResumeData = {
     Databases: string;
     Languages: string;
     Other: string;
+    AI: string;
   };
   experience: Array<{
     title: string;
@@ -69,7 +70,8 @@ type UserResumeDataArrayKeys = {
 
 ///-------------------
 export default function ResumeBuilder() {
-  const iframeRef = useRef(null);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+
   
   const [resumeData, setResumeData] = useState<UserResumeData>({
     personalInfo: {
@@ -97,7 +99,8 @@ export default function ResumeBuilder() {
       Tools: '',
       Databases: '',
       Languages: '',
-      Other: ''
+      Other: '',
+      AI:''
     },
     experience: [{
       title: '',
@@ -499,10 +502,10 @@ export default function ResumeBuilder() {
     
     if (iframe) {
       try {
-        // if (iframe.contentWindow) {
-        //   iframe.contentWindow.focus();
-        //   iframe.contentWindow.print();
-        // }
+        if (iframe?.contentWindow) {
+          iframe?.contentWindow.focus();
+          iframe?.contentWindow.print();
+        }
       } catch (error) {
         const printWindow = window.open('', '_blank');
         if (printWindow) {
@@ -529,6 +532,8 @@ export default function ResumeBuilder() {
 
     return () => clearTimeout(timeout);
   }, [resumeData]);
+
+
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6 min-h-screen  ">
@@ -1063,7 +1068,7 @@ export default function ResumeBuilder() {
       </div>
 
       {/* Preview Section */}
-      <div className="sticky top-6 order-2 lg:order-2">
+      <div className="sticky top-6 order-2 lg:order-2 h-[90vh]">
         <Card className="h-[calc(100vh-3rem)]">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -1075,8 +1080,8 @@ export default function ResumeBuilder() {
             <iframe
               ref={iframeRef}
               title="Resume Preview"
-              className="w-full h-full border-0"
-              sandbox="allow-same-origin"
+              className="w-full h-[90vh] border-0"
+              sandbox="allow-modals allow-scripts allow-same-origin"
             />
           </CardContent>
         </Card>

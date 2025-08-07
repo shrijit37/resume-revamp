@@ -56,7 +56,7 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
     });
 
     // Animation
-    const animation = gsap.to(el, {
+    const animation: gsap.core.Tween = gsap.to(el, {
       [axis]: 0,
       scale: 1,
       opacity: 1,
@@ -72,11 +72,13 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
       },
     });
 
-    return () => {
+    return (): void => {
       // Cleanup
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+
+
       if (animation) {
-        animation.kill();
+        animation?.kill();
       }
       gsap.killTweensOf(el);
     };

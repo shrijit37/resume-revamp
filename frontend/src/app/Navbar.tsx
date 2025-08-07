@@ -5,7 +5,7 @@ import {
   SignedOut,
   UserButton
 } from '@clerk/nextjs'
-import React, { useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
