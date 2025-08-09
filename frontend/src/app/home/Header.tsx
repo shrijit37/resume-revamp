@@ -4,7 +4,8 @@ import { Button } from '@/components/ui/button'
 import AnimatedContent from './AnimatedContent'
 import Image from 'next/image'
 
-const Header = () => {
+
+const Header = ()=> {
   return (
     <div>
         <div className="flex p-5">

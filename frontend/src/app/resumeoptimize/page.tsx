@@ -72,6 +72,7 @@ type UserResumeDataArrayKeys = {
 export default function ResumeBuilder() {
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
+
   
   const [resumeData, setResumeData] = useState<UserResumeData>({
     personalInfo: {
